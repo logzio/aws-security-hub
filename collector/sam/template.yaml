@@ -1,0 +1,55 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: A Lambda function that gets triggered by events from AWS Security Hub and sends those events to Logz.io
+Resources:
+  logzioSecurityHubCollector:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket: aws-security-hub-integration
+        S3Key: test/function.zip
+      Description: Go executable of lambda function that receives an AWS Security Hub event and sends it to logz.io.
+      Environment:
+        Variables:
+          LOGZIO_OPERATIONS_TOKEN: !Ref logzioOperationsToken
+          LOGZIO_LISTENER: !Ref logzioListener
+          LOG_LEVEL: !Ref logzioLogLevel
+          LOG_LEVEL: !Ref logzioLogLevel
+      FunctionName: logzio-security-hub-collector
+      Runtime: go1.x
+  eventRule:
+    Type: 'AWS::Events::Rule'
+    Properties:
+      Description: Rule to send a Security Hub event to Lambda
+      EventPattern:
+        source:
+          - aws.securityhub
+      Name: securityHubToLogzioLambda
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt logzioSecurityHubCollector.Arn
+          Id: logzioAwsSecurityHubCollector
+  lambdaPermissions:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref logzioSecurityHubCollector
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt eventRule.Arn
+Parameters:
+  logzioOperationsToken:
+    Type: String
+    Description: Your Logz.io operations token
+  logzioListener:
+    Type: String
+    Description: Your Logz.io listener with port 8070/8071. For example https://listener.logz.io
+  logzioLogLevel:
+    Type: String
+    Descirption: Log level for the function
+    AllowedValues:
+      - debug
+      - info
+      - warn
+      - error
+      - fatal
+      - panic
+    Default: info

@@ -9,6 +9,7 @@ import (
 const (
 	envLogzioSecurityToken = "LOGZIO_OPERATIONS_TOKEN"
 	envLogzioListener = "LOGZIO_LISTENER"
+	envLogLevel = "LOG_LEVEL"
 )
 
 func GetLogzioSecurityToken() (string, error) {
@@ -32,7 +33,7 @@ func GetLogzioListener() (string, error) {
 }
 
 func GetLoggerLevel() logrus.Level {
-	level := os.Getenv("LOG_LEVEL")
+	level := os.Getenv(envLogLevel)
 	levelParsed, err := logrus.ParseLevel(level)
 	if err != nil {
 		return logrus.InfoLevel
