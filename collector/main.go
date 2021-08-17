@@ -1,7 +1,7 @@
 package main
 
 import (
-	"aws-security-hub/utils"
+	"aws-security-hub/collector/utils"
 	"context"
 	"encoding/json"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -15,6 +15,7 @@ const (
 	detailTypeInsightResults = "Security Hub Insight Results"
 	detailTypeImported = "Security Hub Findings - Imported"
 	detailTypeCustom = "Security Hub Findings - Custom Action"
+	detailTypeCloudTrail = "AWS API Call via CloudTrail"
 	maxBulkSizeBytes = 10 * 1024 * 1024  // 10 MB
 	logzioType = "aws-security-hub"
 )

@@ -1,4 +1,4 @@
-module aws-security-hub
+module aws-security-hub/collector
 
 go 1.15
 
