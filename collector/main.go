@@ -1,7 +1,6 @@
 package main
 
 import (
-	"aws-security-hub/collector/utils"
 	"context"
 	"encoding/json"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -12,31 +11,8 @@ import (
 )
 
 const (
-	detailTypeInsightResults = "Security Hub Insight Results"
-	detailTypeImported = "Security Hub Findings - Imported"
-	detailTypeCustom = "Security Hub Findings - Custom Action"
-	detailTypeCloudTrail = "AWS API Call via CloudTrail"
 	maxBulkSizeBytes = 10 * 1024 * 1024  // 10 MB
-	logzioType = "aws-security-hub"
 )
-
-type AwsSecurityHubEvent struct {
-	Version string `json:"version,omitempty"`
-	Id string `json:"id,omitempty"`
-	DetailType string `json:"detail-type,omitempty"`
-	Source string `json:"source,omitempty"`
-	Account string `json:"account,omitempty"`
-	Time string `json:"time,omitempty"`
-	Region string `json:"region,omitempty"`
-	Resources []string `json:"resources,omitempty"`
-	Detail interface{} `json:"detail,omitempty"`
-}
-
-type LogzioEvent struct {
-	Timestamp string `json:"@timestamp"`
-	Type string `json:"type"`
-	Event AwsSecurityHubEvent `json:"event"`
-}
 
 var logger = log.New()
 
@@ -48,8 +24,16 @@ func HandleRequest(ctx context.Context, securityEvent AwsSecurityHubEvent) error
 		return err
 	}
 
-	logzioEvent := convertAwsEventToLogzioEvent(securityEvent)
+	logzioEvent, err := ConvertAwsEventToLogzioEvent(securityEvent)
+	if err != nil {
+		return err
+	}
+
 	eventBytes, err := json.Marshal(logzioEvent)
+	if err != nil {
+		return err
+	}
+
 	sb.Write(eventBytes)
 	logger.Debugf("Current event: %s", sb.String())
 	if err != nil {
@@ -63,17 +47,17 @@ func HandleRequest(ctx context.Context, securityEvent AwsSecurityHubEvent) error
 }
 
 func main() {
-	logger.SetLevel(utils.GetLoggerLevel())
+	logger.SetLevel(GetLoggerLevel())
 	logger.Debug("Starting aws security hub collector")
 	lambda.Start(HandleRequest)
 }
 
 func getLogzioSender() (*logzio.LogzioSender, error) {
-	token, err := utils.GetLogzioSecurityToken()
+	token, err := GetLogzioSecurityToken()
 	if err != nil {
 		return nil, err
 	}
-	listener, err := utils.GetLogzioListener()
+	listener, err := GetLogzioListener()
 	if err != nil {
 		return nil, err
 	}
@@ -93,18 +77,3 @@ func getLogzioSender() (*logzio.LogzioSender, error) {
 	return sender, nil
 }
 
-func convertAwsEventToLogzioEvent(awsEvent AwsSecurityHubEvent) LogzioEvent {
-	eventToLogzio := awsEvent
-	eventToLogzio.Time = ""
-	if len(eventToLogzio.Resources) == 0 {
-		eventToLogzio.Resources = nil
-	}
-
-	logzioEvent := LogzioEvent{
-		Timestamp: awsEvent.Time,
-		Type:      logzioType,
-		Event:     eventToLogzio,
-	}
-
-	return logzioEvent
-}
