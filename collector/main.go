@@ -7,18 +7,23 @@ import (
 	"github.com/logzio/logzio-go"
 	log "github.com/sirupsen/logrus"
 	"os"
-	"strings"
 )
 
 const (
 	maxBulkSizeBytes = 10 * 1024 * 1024 // 10 MB
 )
 
-var logger = log.New()
+var (
+	logger   = log.New()
+	logLevel = GetLoggerLevel()
+)
 
 func HandleRequest(ctx context.Context, securityEvent AwsSecurityHubEvent) error {
-	var sb strings.Builder
 	logger.Debug("Starting to handle events")
+	if logLevel == log.DebugLevel {
+		logOriginalAwsEvent(securityEvent)
+	}
+
 	logzioSender, err := getLogzioSender()
 	if err != nil {
 		return err
@@ -34,8 +39,7 @@ func HandleRequest(ctx context.Context, securityEvent AwsSecurityHubEvent) error
 		return err
 	}
 
-	sb.Write(eventBytes)
-	logger.Debugf("Current event: %s", sb.String())
+	logger.Debugf("Current event: %s", string(eventBytes))
 	if err != nil {
 		return err
 	}
@@ -53,6 +57,7 @@ func main() {
 }
 
 func getLogzioSender() (*logzio.LogzioSender, error) {
+	var sender *logzio.LogzioSender
 	token, err := GetLogzioSecurityToken()
 	if err != nil {
 		return nil, err
@@ -61,18 +66,34 @@ func getLogzioSender() (*logzio.LogzioSender, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	sender, err := logzio.New(
-		token,
-		logzio.SetUrl(listener),
-		logzio.SetInMemoryQueue(true),
-		logzio.SetinMemoryCapacity(maxBulkSizeBytes),
-		logzio.SetDebug(os.Stdout),
-	)
+	if logLevel == log.DebugLevel {
+		sender, err = logzio.New(
+			token,
+			logzio.SetUrl(listener),
+			logzio.SetInMemoryQueue(true),
+			logzio.SetinMemoryCapacity(maxBulkSizeBytes),
+			logzio.SetDebug(os.Stdout),
+		)
+	} else {
+		sender, err = logzio.New(
+			token,
+			logzio.SetUrl(listener),
+			logzio.SetInMemoryQueue(true),
+			logzio.SetinMemoryCapacity(maxBulkSizeBytes),
+		)
+	}
 
 	if err != nil {
 		return nil, err
 	}
 
 	return sender, nil
+}
+
+func logOriginalAwsEvent(awsEvent AwsSecurityHubEvent) {
+	awsEventBytes, err := json.Marshal(awsEvent)
+	if err != nil {
+		log.Warn("Could not marshal AwsSecurityHubEvent")
+	}
+	logger.Debugf("Event from AWS: %s", string(awsEventBytes))
 }
