@@ -7,7 +7,7 @@ Resources:
     Properties:
       Code:
         S3Bucket: aws-security-hub-integration
-        S3Key: test/function.zip
+        S3Key: 0.0.1/function.zip
       Description: >
         Go executable of lambda function that receives an AWS Security Hub event and sends it to logz.io.
       Environment:
