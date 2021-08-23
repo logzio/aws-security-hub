@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	maxBulkSizeBytes = 10 * 1024 * 1024  // 10 MB
+	maxBulkSizeBytes = 10 * 1024 * 1024 // 10 MB
 )
 
 var logger = log.New()
@@ -76,4 +76,3 @@ func getLogzioSender() (*logzio.LogzioSender, error) {
 
 	return sender, nil
 }
-

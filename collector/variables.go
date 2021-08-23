@@ -8,8 +8,8 @@ import (
 
 const (
 	envLogzioSecurityToken = "LOGZIO_OPERATIONS_TOKEN"
-	envLogzioListener = "LOGZIO_LISTENER"
-	envLogLevel = "LOG_LEVEL"
+	envLogzioListener      = "LOGZIO_LISTENER"
+	envLogLevel            = "LOG_LEVEL"
 )
 
 func GetLogzioSecurityToken() (string, error) {
