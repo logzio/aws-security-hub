@@ -65,3 +65,7 @@ TODO - INSERT TEMPLATE SCHEMA HERE
 | `lambdaPermissions` | `AWS::Lambda::Permission` |
 | `eventRule` | `AWS::Events::Rule` |
 | `lambdaIamRole` | `AWS::IAM::Role` |
+
+## Sample data
+
+Sample events can be found under the `samples` folder.
