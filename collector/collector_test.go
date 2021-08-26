@@ -24,6 +24,7 @@ const (
 
 func TestConvertAwsEventToLogzioEventImported(t *testing.T) {
 	var awsEvent collector.AwsSecurityHubEvent
+	var resources map[string]interface{}
 	awsEventBytes := []byte(getSample("imported.json"))
 	err := json.Unmarshal(awsEventBytes, &awsEvent)
 	assert.NoError(t, err)
@@ -35,8 +36,10 @@ func TestConvertAwsEventToLogzioEventImported(t *testing.T) {
 	assert.Equal(t, collector.LogzioType, logzioEvent.Type)
 	assert.NotNil(t, logzioEvent.Event)
 	assert.NotNil(t, logzioEvent.Event.Detail)
-	details := awsEvent.Detail.(map[string]interface{})["findings"].([]interface{})
-	assert.Equal(t, details[0], logzioEvent.Event.Detail.(collector.DetailImported).Findings)
+	expectedResources := []byte(getSample("expected_resource_imported.json"))
+	err = json.Unmarshal(expectedResources, &resources)
+	assert.NoError(t, err)
+	assert.Equal(t, resources, logzioEvent.Event.Detail.(collector.DetailImported).Findings.(map[string]interface{})["Resources"])
 }
 
 func TestConvertAwsEventToLogzioEventCustom(t *testing.T) {
@@ -61,6 +64,7 @@ func TestConvertAwsEventToLogzioEventCustom(t *testing.T) {
 
 func TestConvertAwsEventToLogzioEventInsight(t *testing.T) {
 	var awsEvent collector.AwsSecurityHubEvent
+	var insightResults map[string]float64
 	awsEventBytes := []byte(getSample("insight.json"))
 	err := json.Unmarshal(awsEventBytes, &awsEvent)
 	assert.NoError(t, err)
@@ -74,7 +78,11 @@ func TestConvertAwsEventToLogzioEventInsight(t *testing.T) {
 	assert.NotNil(t, logzioEvent.Event.Detail)
 	assert.Equal(t, awsEvent.Detail.(map[string]interface{})["actionName"], logzioEvent.Event.Detail.(map[string]interface{})["actionName"])
 	assert.Equal(t, awsEvent.Detail.(map[string]interface{})["actionDescription"], logzioEvent.Event.Detail.(map[string]interface{})["actionDescription"])
-	assert.Equal(t, awsEvent.Detail.(map[string]interface{})["insightResults"], logzioEvent.Event.Detail.(map[string]interface{})["insightResults"])
+	expectedInsightsBytes := []byte(getSample("expected_insight_results_insight.json"))
+	err = json.Unmarshal(expectedInsightsBytes, &insightResults)
+	assert.NoError(t, err)
+	assert.Equal(t, insightResults, logzioEvent.Event.Detail.(map[string]interface{})["insightResults"])
+
 }
 
 func TestConvertAwsEventToLogzioEventCloudTrial(t *testing.T) {
