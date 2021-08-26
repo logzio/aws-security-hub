@@ -1,0 +1,24 @@
+{
+  "arn:aws:ec2:us-west-2:111122223333:instance/i-1234567890abcdef0.Type": "AwsEc2Instance",
+  "arn:aws:ec2:us-west-2:111122223333:instance/i-1234567890abcdef0.Id": "arn:aws:ec2:us-west-2:111122223333:instance/i-1234567890abcdef0",
+  "arn:aws:ec2:us-west-2:111122223333:instance/i-1234567890abcdef0.Partition": "aws",
+  "arn:aws:ec2:us-west-2:111122223333:instance/i-1234567890abcdef0.Region": "us-west-2",
+  "arn:aws:ec2:us-west-2:111122223333:instance/i-1234567890abcdef0.ResourceRole": "Target",
+  "arn:aws:ec2:us-west-2:111122223333:instance/i-1234567890abcdef0.Tags": {
+    "billingCode": "Lotus-1-2-3",
+    "needsPatching": "true"
+  },
+  "arn:aws:ec2:us-west-2:111122223333:instance/i-1234567890abcdef0.Details": {
+    "AwsEc2Instance": {
+      "Type": "i3.xlarge",
+      "ImageId": "ami-abcd1234",
+      "IpV4Addresses": [ "54.194.252.215", "192.168.1.88" ],
+      "IpV6Addresses": [ "2001:db8:1234:1a2b::123" ],
+      "KeyName": "my_keypair",
+      "IamInstanceProfileArn": "arn:aws:iam::111111111111:instance-profile/AdminRole",
+      "VpcId": "vpc-11112222",
+      "SubnetId": "subnet-56f5f633",
+      "LaunchedAt": "2018-05-08T16:46:19.000Z"
+    }
+  }
+}
