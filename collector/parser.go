@@ -27,7 +27,7 @@ func parseAwsEvent(awsEvent AwsSecurityHubEvent) (AwsSecurityHubEvent, error) {
 	case DetailTypeCustom:
 		return parseCustomEvent(awsEvent)
 	case DetailTypeInsightResults:
-		return parseInsightsEvent(awsEvent), nil
+		return awsEvent, nil
 	case DetailTypeCloudTrail:
 		return awsEvent, nil
 	default:
@@ -47,22 +47,9 @@ func parseImportedEvent(awsEvent AwsSecurityHubEvent) (AwsSecurityHubEvent, erro
 		return awsEvent, err
 	}
 
-	awsEvent.Detail = parseImportedResources(DetailImported{Findings: details.Findings[0]})
+	awsEvent.Detail = DetailImported{Findings: details.Findings[0]}
 
 	return awsEvent, nil
-}
-
-func parseImportedResources(detail DetailImported) DetailImported {
-	resources := make(map[string]interface{})
-	for _, resource := range detail.Findings.(map[string]interface{})["Resources"].([]interface{}) {
-		id := resource.(map[string]interface{})["Id"].(string)
-		for resourceKey, resourceValue := range resource.(map[string]interface{}) {
-			resources[id + "." + resourceKey] = resourceValue
-		}
-	}
-
-	detail.Findings.(map[string]interface{})["Resources"] = resources
-	return detail
 }
 
 func parseCustomEvent(awsEvent AwsSecurityHubEvent) (AwsSecurityHubEvent, error) {
@@ -84,17 +71,4 @@ func parseCustomEvent(awsEvent AwsSecurityHubEvent) (AwsSecurityHubEvent, error)
 	}
 
 	return awsEvent, nil
-}
-
-func parseInsightsEvent(awsEvent AwsSecurityHubEvent) AwsSecurityHubEvent {
-	insights := make(map[string]float64)
-	for _, insight := range awsEvent.Detail.(map[string]interface{})["insightResults"].([]interface{}) {
-		for key, val := range insight.(map[string]interface{}) {
-			// this loop will only iterate once
-			insights[key] = val.(float64)
-		}
-	}
-
-	awsEvent.Detail.(map[string]interface{})["insightResults"] = insights
-	return awsEvent
 }
