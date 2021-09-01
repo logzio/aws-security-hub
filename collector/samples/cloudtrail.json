@@ -1,0 +1,13 @@
+{
+  "version":"0",
+  "id":"1a1111a1-b22b-3c33-444d-5555e5ee5555",
+  "detail-type":"AWS API Call via CloudTrail",
+  "source":"aws.securityhub",
+  "account":"111122223333",
+  "time":"2019-04-11T18:43:48Z",
+  "region":"us-east-1",
+  "detail":{
+    "awsRegion":"us-east-1",
+    "eventCategory":"Management"
+  }
+}

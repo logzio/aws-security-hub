@@ -1,0 +1,46 @@
+{
+  "version":"0",
+  "id":"CWE-event-id",
+  "detail-type":"Security Hub Findings - Imported",
+  "source":"aws.securityhub",
+  "account":"111122223333",
+  "time":"2019-04-11T21:52:17Z",
+  "region":"us-west-2",
+  "resources":[
+    "arn:aws:securityhub:us-west-2::product/aws/macie/arn:aws:macie:us-west-2:111122223333:integtest/trigger/6294d71b927c41cbab915159a8f326a3/alert/f2893b211841"
+  ],
+  "detail":{
+    "findings": [{
+      "some_field": {
+        "another_field": "hello world",
+        "last_field": "ok"
+      },
+      "Resources": [
+        {
+          "Type": "AwsEc2Instance",
+          "Id": "arn:aws:ec2:us-west-2:111122223333:instance/i-1234567890abcdef0",
+          "Partition": "aws",
+          "Region": "us-west-2",
+          "ResourceRole": "Target",
+          "Tags": {
+            "billingCode": "Lotus-1-2-3",
+            "needsPatching": "true"
+          },
+          "Details": {
+            "AwsEc2Instance": {
+              "Type": "i3.xlarge",
+              "ImageId": "ami-abcd1234",
+              "IpV4Addresses": [ "54.194.252.215", "192.168.1.88" ],
+              "IpV6Addresses": [ "2001:db8:1234:1a2b::123" ],
+              "KeyName": "my_keypair",
+              "IamInstanceProfileArn": "arn:aws:iam::111111111111:instance-profile/AdminRole",
+              "VpcId": "vpc-11112222",
+              "SubnetId": "subnet-56f5f633",
+              "LaunchedAt": "2018-05-08T16:46:19.000Z"
+            }
+          }
+        }
+      ]
+    }]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "version": "0",
+  "id": "1a1111a1-b22b-3c33-444d-5555e5ee5555",
+  "detail-type": "Security Hub Insight Results",
+  "source": "aws.securityhub",
+  "account": "111122223333",
+  "time": "2017-12-22T18:43:48Z",
+  "region": "us-west-1",
+  "resources": [
+    "arn:aws:securityhub:us-west-1:111122223333::product/aws/macie:us-west-1:222233334444:test/trigger/1ec9cf700ef6be062b19584e0b7d84ec/alert/f2893b211841"
+  ],
+  "detail": {
+    "actionName":"name of the action",
+    "actionDescription":"description of the action",
+    "insightArn":"ARN of the insight",
+    "insightName":"Name of the insight",
+    "resultType":"ResourceAwsIamAccessKeyUserName",
+    "number of results":"number of results, max of 100",
+    "insightResults": [
+      {"result 1": 5},
+      {"result 2": 6}
+    ]
+  }
+}

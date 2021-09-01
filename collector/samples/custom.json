@@ -1,0 +1,24 @@
+{
+  "version": "0",
+  "id": "1a1111a1-b22b-3c33-444d-5555e5ee5555",
+  "detail-type": "Security Hub Findings - Custom Action",
+  "source": "aws.securityhub",
+  "account": "111122223333",
+  "time": "2019-04-11T18:43:48Z",
+  "region": "us-west-1",
+  "resources": [
+    "arn:aws:securityhub:us-west-1:111122223333:action/custom/custom-action-name"
+  ],
+  "detail": {
+    "actionName":"custom-action-name",
+    "actionDescription": "description of the action",
+    "findings": [
+      {
+        "some_field": {
+          "another_field": "hello world",
+          "last_field": "ok"
+        }
+      }
+    ]
+  }
+}
