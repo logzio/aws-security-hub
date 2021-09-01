@@ -62,7 +62,7 @@ If you still don't see your events, see [log shipping troubleshooting]({{site.ba
 
 This auto-deployment will create the following resources in your AWS account:
 
-TODO - INSERT TEMPLATE SCHEMA HERE
+![Resources](https://dytvr9ot2sszz.cloudfront.net/logz-docs/aws/resources-security-hub.png)
 
 | Resource Name | Resource Type |
 | --- | --- |
