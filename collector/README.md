@@ -56,7 +56,7 @@ Confirm that you acknowledge that AWS CloudFormation might create IAM resources 
 
 Give the stack some time to deploy and the resources to get created. Once this is finished, the stack sends a security event to Logz.io as soon as the event is created on the security hub. You can then see the data in [Kibana](https://app.logz.io/#/dashboard/kibana).
 
-If you still don't see your events, see [log shipping troubleshooting]({{site.baseurl}}/user-guide/log-shipping/log-shipping-troubleshooting.html).
+If you still don't see your events, see [log shipping troubleshooting](https://docs.logz.io/user-guide/log-shipping/log-shipping-troubleshooting.html).
 
 ## Resources
 
