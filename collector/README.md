@@ -19,6 +19,7 @@ Select the button below to create a new stack dedicated to sending events from A
 | AWS Region | Launch a stack |
 | --- | --- |
 | `us-east-1` | [![Deploy to AWS](https://dytvr9ot2sszz.cloudfront.net/logz-docs/lights/LightS-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=logzio-security-hub-collector&templateURL=https://logzio-aws-integrations-us-east-1.s3.amazonaws.com/aws-security-hub-collector/0.0.1/template.yaml) |
+| `eu-west-1` | [![Deploy to AWS](https://dytvr9ot2sszz.cloudfront.net/logz-docs/lights/LightS-button.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=logzio-security-hub-collector&templateURL=https://logzio-aws-integrations-eu-west-1.s3.amazonaws.com/aws-security-hub-collector/0.0.1/template.yaml) |
 
 ### Step 1 - Specify template
 
