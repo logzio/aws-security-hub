@@ -50,7 +50,6 @@ Specify the **Key** and **Value** parameters for the **Tags** (optional) and sel
 
 Confirm that you acknowledge that AWS CloudFormation might create IAM resources and select **Create stack**.
 
-![Review deployment](https://dytvr9ot2sszz.cloudfront.net/logz-docs/aws/security-hub-step4a.png)
 ![Confirm deployment](https://dytvr9ot2sszz.cloudfront.net/logz-docs/aws/security-hub-step4b.png)
 
 ### Check Logz.io for your events
