@@ -17,7 +17,7 @@ builds:
     dir: aws-security-hub
 archives:
   - format: zip
-    name_template: '{{ .ProjectName }}_aws-security-hub-collector_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+    name_template: '{{ .ProjectName }}_aws-security-hub_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
     id: aws-security-hub
     builds:
       - aws-security-hub
