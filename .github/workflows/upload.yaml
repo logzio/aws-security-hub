@@ -50,7 +50,7 @@ jobs:
           PATH_TO_FILE: ${{ github.workspace }}/collector/sam/template.yaml
         run: python release/main.py
       - name: Download release for security hub collector
-        run: wget -c https://github.com/logzio/aws-security-hub/releases/download/${{ github.event.release.tag_name }}/aws-security-hub_${{ github.event.release.tag_name }}_linux_amd64.zip -O function.zip
+        run: wget -c https://github.com/logzio/aws-security-hub/releases/download/${{ github.event.release.tag_name }}/aws-security-hub_collector_${{ github.event.release.tag_name }}_linux_amd64.zip -O function.zip
       - name: Upload Zip - aws-security-hub (release)
         env:
           AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
