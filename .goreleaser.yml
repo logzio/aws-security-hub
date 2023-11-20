@@ -14,7 +14,7 @@ builds:
       - amd64
     binary: 'bootstrap'
     id: aws-security-hub
-    dir: aws-security-hub
+    dir: .
 archives:
   - format: zip
     name_template: '{{ .ProjectName }}_aws-security-hub_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
