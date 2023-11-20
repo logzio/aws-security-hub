@@ -1,5 +1,4 @@
-before:
-  hooks:
+hooks:
 builds:
   - env:
       - CGO_ENABLED=0
@@ -13,14 +12,14 @@ builds:
     goarch:
       - amd64
     binary: 'bootstrap'
-    id: aws-security-hub
-    dir: .
+    id: collector
+    dir: collector
 archives:
   - format: zip
-    name_template: '{{ .ProjectName }}_aws-security-hub_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
-    id: aws-security-hub
+    name_template: '{{ .ProjectName }}_collector_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+    id: collector
     builds:
-      - aws-security-hub
+      - collector
 release:
 changelog:
   skip: true
