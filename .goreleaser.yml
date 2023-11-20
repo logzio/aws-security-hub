@@ -13,14 +13,14 @@ builds:
     goarch:
       - amd64
     binary: 'bootstrap'
-    id: aws-security-hub-collector
-    dir: aws-security-hub-collector
+    id: aws-security-hub
+    dir: aws-security-hub
 archives:
   - format: zip
     name_template: '{{ .ProjectName }}_aws-security-hub-collector_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
-    id: aws-security-hub-collector
+    id: aws-security-hub
     builds:
-      - aws-security-hub-collector
+      - aws-security-hub
 release:
 changelog:
   skip: true
