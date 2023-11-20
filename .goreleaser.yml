@@ -17,7 +17,7 @@ builds:
     dir: collector
 archives:
   - format: zip
-    name_template: '{{ .ProjectName }}_collector_v{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+    name_template: '{{ .ProjectName }}_collector_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
     id: collector
     builds:
       - collector
