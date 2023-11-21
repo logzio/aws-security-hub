@@ -13,7 +13,8 @@ builds:
       - linux
     goarch:
       - amd64
-    binary: 'main'
+    binary: 'bootstrap'
+    dir: collector
 archives:
   - id: awsSecurityHubArchive
     builds: [awsSecurityHub]
