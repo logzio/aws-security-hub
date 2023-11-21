@@ -83,7 +83,7 @@ jobs:
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_KEY }}
           aws configure set region ${{ matrix.aws_region }}
-          aws s3 cp ./template-${{ matrix.aws_region }}.yaml s3://logzio-aws-integrations-${{ matrix.aws_region }}/aws-security-hub-collector/${{ env.version_without }}/template.yaml --acl public-read
+          aws s3 cp ./template.yaml s3://logzio-aws-integrations-${{ matrix.aws_region }}/aws-security-hub-collector/${{ env.version_without }}/template.yaml --acl public-read
           aws s3 cp ./function.zip s3://logzio-aws-integrations-${{ matrix.aws_region }}/aws-security-hub-collector/${{ env.version_without }}/function.zip --acl public-read
           
         shell: bash
