@@ -1,0 +1,26 @@
+before:
+  hooks:
+builds:
+  - id: awsSecurityHub
+    env:
+      - CGO_ENABLED=0
+    mod_timestamp: '{{ .CommitTimestamp }}'
+    flags:
+      - -trimpath
+    ldflags:
+      - '-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}'
+    goos:
+      - linux
+    goarch:
+      - amd64
+    binary: 'bootstrap'
+    dir: collector
+archives:
+  - id: awsSecurityHubArchive
+    builds: [awsSecurityHub]
+    format: zip
+    name_template:  >-
+      aws-security-hub_{{ index (split .Version "-") 0 }}_{{ .Os }}_{{ .Arch }}
+release:
+changelog:
+  skip: true
