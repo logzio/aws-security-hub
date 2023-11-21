@@ -60,7 +60,7 @@ jobs:
       - name: create new version
         run: |
           cp ./collector/sam/template.yaml ./template-${{ matrix.aws_region }}.yaml
-          sed -i "s/<<VERSION>>/${{ github.event.release.tag_name }}/" "./template-${{ matrix.aws_region }}.yaml"          
+          sed -i "s/<<VERSION>>/${{ github.event.release.tag_name }}/" "./template-${{ matrix.aws_region }}.yaml"
           sed -i "s/<<REGION>>/${{ matrix.aws_region }}/" "./template-${{ matrix.aws_region }}.yaml"
         shell: bash
       - name: Upload to aws
