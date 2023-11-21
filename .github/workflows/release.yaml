@@ -68,7 +68,7 @@ jobs:
           version_without=$(echo ${version:1})
           echo "version_without=${version_without}" >> "$GITHUB_ENV"
       - name: Download release for security hub collector
-        run: wget -c https://github.com/logzio/aws-security-hub/releases/download/${{ github.event.release.tag_name }}/aws-security-hub_collector_${{ github.event.release.tag_name }}_linux_amd64.zip -O function.zip
+        run: wget -c https://github.com/logzio/aws-security-hub/releases/download/${{ github.event.release.tag_name }}/aws-security-hub_${{ github.event.release.tag_name }}_linux_amd64.zip -O function.zip
       - name: create new version
         run: |
           cp ./collector/sam/template.yaml ./template.yaml${{ matrix.aws_region }}.yaml
