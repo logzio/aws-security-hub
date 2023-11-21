@@ -7,7 +7,7 @@ Resources:
     Properties:
       Code:
         S3Bucket: logzio-aws-integrations-us-east-1
-        S3Key: aws-security-hub-collector/0.0.1/function.zip
+        S3Key: aws-security-hub-collector/0.0.2/function.zip
       Description: >
         Go executable of lambda function that receives an AWS Security Hub event and sends it to logz.io.
       Environment:
