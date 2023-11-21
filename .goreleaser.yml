@@ -20,7 +20,7 @@ archives:
     builds: [awsSecurityHub]
     format: zip
     name_template:  >-
-      aws_security_hub_{{ index (split .Version "-") 0 }}_{{ .Os }}_{{ .Arch }}
+      aws-security-hub_{{ index (split .Version "-") 0 }}_{{ .Os }}_{{ .Arch }}
 release:
 changelog:
   skip: true
