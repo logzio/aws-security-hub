@@ -16,9 +16,9 @@ Resources:
           LOGZIO_LISTENER: !Ref logzioListener
           LOG_LEVEL: !Ref logzioLogLevel
       FunctionName: logzio-security-hub-collector
-      Handler: main
+      Handler: bootstrap
       Role: !GetAtt lambdaIamRole.Arn
-      Runtime: go1.x
+      Runtime: provided.al2023
   eventRule:
     Type: 'AWS::Events::Rule'
     Properties:
