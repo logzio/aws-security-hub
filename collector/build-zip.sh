@@ -1,4 +1,4 @@
-GOOS=linux GOARCH=amd64 go build -o main *.go
-chmod +x main
-zip -r function.zip main
-rm main
+GOOS=linux GOARCH=amd64 go build -o bootstrap *.go
+chmod +x bootstrap
+zip -r function.zip bootstrap
+rm bootstrap
