@@ -6,6 +6,8 @@ on:
 jobs:
   build_function:
     name: Build function
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -27,7 +29,6 @@ jobs:
           args: release --clean
         env:
           GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
   upload_to_buckets:
     name: Upload to S3 buckets
     runs-on: ubuntu-latest
